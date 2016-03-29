@@ -55,7 +55,9 @@ public class Config
     private static String proxyPassword;
     private static File cacheDirectory = new File ("cache");
     private static File patchesDirectory = new File ("patches");
-    
+
+    private static String configLastAbsolutePath = null;
+
     public static synchronized void reload ()
     {
         String fileName = System.getProperty("dsmp.conf", "dsmp.conf");
@@ -65,10 +67,13 @@ public class Config
         
         // TODO This means one access to the file system per Config method call
         long lastModified = configFile.lastModified();
-        if (config == null || lastModified != configLastModified)
+        String configFileAbsolutePath = configFile.getAbsolutePath();
+        // load configuration if no previous config or different timestamp or different path
+        if (config == null || lastModified != configLastModified || !configFileAbsolutePath.equals(configLastAbsolutePath))
         {
-            log.info((config == null ? "Loading" : "Reloading")+ " config from "+configFile.getAbsolutePath());
+            log.info((config == null ? "Loading" : "Reloading")+ " config from "+ configFileAbsolutePath);
             configLastModified = lastModified;
+            configLastAbsolutePath = configFileAbsolutePath;
 
             SAXBuilder builder = new SAXBuilder ();
             Throwable t = null;
@@ -110,7 +115,7 @@ public class Config
             
             if (t != null)
             {
-                String msg = "Error loading config from "+configFile.getAbsolutePath();
+                String msg = "Error loading config from "+ configFileAbsolutePath;
                 log.error (msg, t);
                 if (config == null)
                     throw new Error (msg, t);

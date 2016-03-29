@@ -19,9 +19,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.pdark</groupId>
+	<groupId>dk.statsbiblioteket.user.tra.de.pdark.repo.https_3A_2F_2Fgithub_2Ecom_2Fravn_2Fmaven_2Djit_2Egit</groupId>
 	<artifactId>dsmp</artifactId>
-	<version>1.1</version>
+	<version>master-SNAPSHOT</version>
 	<name>DSMP</name>
 	<description>Dead Simple Maven Proxy</description>
 
@@ -38,11 +38,11 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.1</version>
+				<version>3.1</version>
 				<configuration>
 					<!-- Quellcode mit Java 1.5 übersetzen -->
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -98,7 +98,7 @@
 			
 		</plugins>
 	</build>
-
+<!--
 	<reporting>
 		<plugins>
 			<plugin>
@@ -132,22 +132,36 @@
 					<xmlOutput>false</xmlOutput>
 					<threshold>Normal</threshold>
 					<effort>Default</effort>
-					<!--excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+					<!- -excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
 						<includeFilterFile>findbugs-include.xml</includeFilterFile>
 						<visitors>FindDeadLocalStores,UnreadFields</visitors>
 						<omitVisitors>FindDeadLocalStores,UnreadFields</omitVisitors>
-						<pluginList>/libs/fb-contrib/fb-contrib-2.8.0.jar</pluginList-->
+						<pluginList>/libs/fb-contrib/fb-contrib-2.8.0.jar</pluginList- ->
 				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
+	-->
 
 	<dependencies>
+        <!--
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.13</version>
 		</dependency>
+		-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.6</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
